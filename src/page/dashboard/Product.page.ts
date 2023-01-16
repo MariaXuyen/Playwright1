@@ -1,7 +1,8 @@
 import { Locator, Page } from "@playwright/test";
+import { Product } from "../types/product.type";
 import { Dashboard } from "./Dashboard.page";
 
-export class Product extends Dashboard {
+export class ProductPage extends Dashboard {
   title: Locator;
   price: Locator;
   addVariantButton: Locator;
@@ -49,5 +50,17 @@ export class Product extends Dashboard {
     await this.selectProduct.click();
     await this.deleteProductButton.click();
     await this.confirmDeleteButton.click();
+  }
+
+  async createProduct(product: Product){
+    await this.title.fill(product.name);
+    await this.price.fill(product.price + "");
+    await this.addVariantButton.click();
+    await this.optionName.fill(product.option.name);
+    const joinedProductOptions = product.option.value.join(",");
+    await this.optionValues.fill(joinedProductOptions);
+    await this.saveProductButton.click();
+
+
   }
 }

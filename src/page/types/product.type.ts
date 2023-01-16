@@ -1,9 +1,9 @@
 
 export type Product = {
-    name: String;
+    name: string;
     price: number;
     option: {
         name: string;
-        value: "Red, Blue, Gold"
+        value: string[];
     }
 };
